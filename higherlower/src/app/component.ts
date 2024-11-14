@@ -4,19 +4,33 @@ import { Card } from "./card.model";
 
 @Component({
     selector: "app",
-    templateUrl: "template.html"
+    templateUrl: "./template.html"
 })
 export class CardComponent {
     model: Model = new Model();
-    randomCard: Card;
+    playerCard: Card | undefined;
+    computerCard: Card | undefined;
+    winner: string | undefined;
 
     constructor() {
-        // Ensure randomCard always has a value by setting it in the constructor
-        this.randomCard = this.model.getRandomCardById() || this.getFallbackCard();
+        this.drawCards();
     }
 
-    // Optional fallback card in case the deck is empty
-    private getFallbackCard(): Card {
-        return new Card(0, "None", "No cards available", 0);
+    drawCards() {
+        this.playerCard = this.model.getRandomCardById();
+        this.computerCard = this.model.getRandomCardById();
+
+        // Ensure both cards are defined and compare ranks
+        if (this.playerCard && this.computerCard) {
+            if (this.playerCard.rank! > this.computerCard.rank!) {
+                this.winner = "You win!";
+            } else if (this.playerCard.rank! < this.computerCard.rank!) {
+                this.winner = "You lose!";
+            } else {
+                this.winner = "It's a tie!";
+            }
+        } else {
+            this.winner = "No cards available.";
+        }
     }
 }

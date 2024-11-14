@@ -1,9 +1,18 @@
-<div class="bg-info text-white text-center p-2">>
-    Your Card: {{ randomCard.description }} ({{ randomCard.suit }})
+<div bg-info text-white p-2>
+    <h3>Your Card</h3>
+    <p *ngIf="playerCard">{{ playerCard.description }}</p>
+    <p *ngIf="!playerCard">No card drawn for player.</p>
 </div>
 
-<div class="bg-info text-white text-center p-2">>
-    Opponent's Card: {{ randomCard.description }} ({{ randomCard.suit }})
+<div bg-info text-white p-2>
+    <h3>Computer's Card</h3>
+    <p *ngIf="computerCard">{{ computerCard.description }}</p>
+    <p *ngIf="!computerCard">No card drawn for computer.</p>
 </div>
 
-<!-- TODO: Add logic to show winner. Add button to display new cards. Best 2 out of 3 game? -->
+<div bg-warning p-2>
+    <h3>Result</h3>
+    <p>{{ winner }}</p>
+</div>
+
+<button (click)="drawCards()">Draw New Cards</button>

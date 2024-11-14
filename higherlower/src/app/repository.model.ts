@@ -24,7 +24,9 @@ export class Model {
         if (this.cards.length === 0) {
             return undefined;
         }
+        
         const randomIndex = Math.floor(Math.random() * this.cards.length);
         return this.cards[randomIndex];
     }
+    
 }
